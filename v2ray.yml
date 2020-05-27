@@ -1,0 +1,16 @@
+---
+version: "2.1"
+services:
+  wireguard:
+    image: v2ray/official
+    container_name: v2ray
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    volumes:
+      - /etc/v2ray:/etc/v2ray
+      - /var/log/v2ray:/var/log/v2ray
+    ports:
+      - serverPort:5280
+    restart: unless-stopped
+    command: ["v2ray","-config=/etc/v2ray/config.json"]
